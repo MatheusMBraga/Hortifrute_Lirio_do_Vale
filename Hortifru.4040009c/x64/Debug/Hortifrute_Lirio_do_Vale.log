@@ -1,0 +1,6 @@
+﻿  program.c
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(41,9): warning C4013: 'exit' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(63,13): warning C4013: 'system' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(121,17): warning C4013: 'soma' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(181,1): warning C4716: 'soma': deve retornar um valor
+  Hortifrute_Lirio_do_Vale.vcxproj -> C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\x64\Debug\Hortifrute_Lirio_do_Vale.exe
