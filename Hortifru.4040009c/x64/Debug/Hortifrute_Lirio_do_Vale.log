@@ -1,6 +1,10 @@
 ﻿  program.c
-C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(41,9): warning C4013: 'exit' indefinido; assumindo extern retornando int
-C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(63,13): warning C4013: 'system' indefinido; assumindo extern retornando int
-C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(121,17): warning C4013: 'soma' indefinido; assumindo extern retornando int
-C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(181,1): warning C4716: 'soma': deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(122,17): warning C4013: 'Estoque_ADM' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(124,17): warning C4013: 'system' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(132,17): warning C4013: 'exit' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(106,13): warning C4102: 'inicio_adm': rótulo não referenciado
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(196,28): warning C4013: 'realloc' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(196,26): warning C4047: '=': 'Produto *' difere em níveis de indireção de 'int'
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(240,5): warning C4013: 'free' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(277,1): warning C4715: 'Estoque_ADM': nem todos os caminhos de controle retornam um valor
   Hortifrute_Lirio_do_Vale.vcxproj -> C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\x64\Debug\Hortifrute_Lirio_do_Vale.exe
