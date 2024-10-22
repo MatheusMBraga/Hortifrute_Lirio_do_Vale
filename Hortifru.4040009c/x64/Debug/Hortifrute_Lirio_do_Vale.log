@@ -1,4 +1,4 @@
 ﻿  program.c
 C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(124,17): warning C4013: 'Estoque_ADM' indefinido; assumindo extern retornando int
-C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(276,1): warning C4715: 'Estoque_ADM': nem todos os caminhos de controle retornam um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(425,1): warning C4715: 'Estoque_ADM': nem todos os caminhos de controle retornam um valor
   Hortifrute_Lirio_do_Vale.vcxproj -> C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\x64\Debug\Hortifrute_Lirio_do_Vale.exe

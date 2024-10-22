@@ -166,10 +166,18 @@ int Estoque_ADM()
     */
 
     struct Produto {
-        int id;
-        char nome[20];
-        int quantidade;
-        float valor;
+        // Fruta
+        int idF;
+        char nomeF[20];
+        int quantidadeF;
+        float valorF;
+
+        //Legume
+        int idL;
+        char nomeL[20];
+        int quantidadeL;
+        float valorL;
+       
     };
 
     struct Produto* produtos = NULL; // Ponteiro para produtos
@@ -177,20 +185,25 @@ int Estoque_ADM()
     int capacidade = 0;
     int opcao = 0;
 
+    int tamanhoL = 0; // Número de produtos inseridos
+    int capacidadeL = 0;
+
     while (1) {
         
         printf("\n");
         printf("________ESTOQUE________\n");
         printf("\n");
-
         printf("1. Adicionar produto\n");
         printf("2. Listar produtos\n");
         printf("3. Voltar\n");
         printf("==> ");
         scanf("%d", &opcao);
+        int frutaLegume;
+        printf("\n");
 
+        // lista de opcoes
         if (opcao == 1) {
-
+            //adicionar produtos
             printf("\n");
             printf("\n");
             printf("_____NOVO PRODUTO AO ESTOQUE______");
@@ -200,7 +213,7 @@ int Estoque_ADM()
             char addItem;
             do
             {
-
+                //FRUTA
                 if (tamanho == capacidade) {
                     capacidade = (capacidade == 0) ? 1 : capacidade * 2;  // Dobra a capacidade
                     struct Produto* temp = realloc(produtos, capacidade * sizeof(struct Produto));
@@ -212,22 +225,83 @@ int Estoque_ADM()
                     produtos = temp;  // Atualiza o ponteiro
                 }
 
+                //LEGUMES
+                if (tamanhoL == capacidadeL) {
+                    capacidadeL = (capacidadeL == 0) ? 1 : capacidadeL * 2;  // Dobra a capacidade
+                    struct Produto* temp = realloc(produtos, capacidadeL * sizeof(struct Produto));
+                    if (temp == NULL) {
+                        printf("Erro ao alocar memória!\n");
+                        free(produtos);  // Libera a memória previamente alocada
+                        return 1;  // Sai em caso de erro
+                    }
+                    produtos = temp;  // Atualiza o ponteiro
+                }
+
                 // Adiciona um novo produto
                 struct Produto novoProduto;
-                novoProduto.id = tamanho + 1;  // Define o ID automaticamente
+                printf("Qual e o tipo do produto?\n");
+                printf("\n");
+                printf("1. Fruta\n");
+                printf("2. Legume\n");
+                printf("3. Voltar\n");
 
-                printf("Nome do produto: ");
-                scanf(" %49[^\n]", novoProduto.nome);  // Lê o nome com espaços, até 49 caracteres
+                printf("==> ");
+                scanf("%d", &frutaLegume);
 
-                printf("Quantidade: ");
-                scanf("%d", &novoProduto.quantidade);
 
-                printf("Valor: ");
-                scanf("%f", &novoProduto.valor);
+                if (frutaLegume == 1)
+                {
+                    novoProduto.idF = tamanho + 1;  // Define o ID automaticamente
 
-                // Adiciona o novo produto ao array
-                produtos[tamanho] = novoProduto;  // Copia os dados para o array
-                tamanho++;  // Incrementa o número de produtos
+                    printf("Nome do produto: ");
+                    scanf(" %49[^\n]", novoProduto.nomeF);  // Lê o nome com espaços, até 49 caracteres
+
+                    printf("Quantidade: ");
+                    scanf("%d", &novoProduto.quantidadeF);
+
+                    printf("Valor: ");
+                    scanf("%f", &novoProduto.valorF);
+
+                    // Adiciona o novo produto ao array
+                    produtos[tamanho] = novoProduto;  // Copia os dados para o array
+                    tamanho++;  // Incrementa o número de produtos
+                    printf("\n");
+                }
+                else if (frutaLegume == 2)
+                {
+                    novoProduto.idL = tamanhoL + 1;  // Define o ID automaticamente
+
+                    printf("Nome do produto: ");
+                    scanf(" %20[^\n]", novoProduto.nomeL);  // Lê o nome com espaços, até 49 caracteres
+
+                    printf("Quantidade: ");
+                    scanf("%d", &novoProduto.quantidadeL);
+
+                    printf("Valor: ");
+                    scanf("%f", &novoProduto.valorL);
+
+                    // Adiciona o novo produto ao array
+                    produtos[tamanhoL] = novoProduto;  // Copia os dados para o array
+                    tamanhoL++;  // Incrementa o número de produtos
+                    printf("\n");
+                }
+                else if (frutaLegume == 3)
+                {
+                    printf("\n");
+                    printf("Voltando ao estoque...\n");
+                    printf("\n");
+                    break;
+                }
+                else
+                {
+                    printf("\n");
+                    printf("Digito invalido!\n");
+                    printf("\n");
+                    system("pause");
+                }
+
+                
+
                 printf("\n");
                 printf("Produto adicionado com sucesso!\n");
                 printf("\n");
@@ -241,20 +315,95 @@ int Estoque_ADM()
             
         }
         else if (opcao == 2) {
-            // Listar produtos
+            // Lista de produtos
             printf("\n");
             printf("\n");
             printf("___________PRODUTOS EM ESTOQUE__________\n");
             printf("\n");
             printf("\n");
-            printf(" ID \t PRODUTO \t QTD \t VALOR \n");
-            printf("________________________________________\n");
+            
+            while (1)
+            {
+                printf("\n");
+                printf("Qual produto deseja acessar? \n");
+                printf("1. Frutas\n");
+                printf("2. Legumes\n");
+                printf("3. Todos\n");
+                printf("4. Voltar\n");
+                printf("==> ");
+                scanf("%d", &frutaLegume);
 
-            for (int i = 0; i < tamanho; i++) { // Lista todos os produtos
-                printf(" %d \t %-10s \t %d \t R$%.2f\n",
-                    produtos[i].id, produtos[i].nome, produtos[i].quantidade, produtos[i].valor);
+                printf("\n");
+            
+                if (frutaLegume == 1)
+                {
+                    printf("FRUTAS:\n");
+                    printf("\n");
+                    printf(" ID \t PRODUTO \t QTD \t VALOR \n");
+                    printf("________________________________________\n");
+
+                    for (int i = 0; i < tamanho; i++) { // Lista todos os produtos
+                        printf(" %d \t %-10s \t %d \t R$%.2f\n",
+                            produtos[i].idF, produtos[i].nomeF, produtos[i].quantidadeF, produtos[i].valorF);
+                    }
+                    printf("\n");
+                    printf("\n");
+                    system("pause");
+                }
+                else if (frutaLegume == 2)
+                {
+                    printf("LEGUMES:\n");
+                    printf("\n");
+                    printf(" ID \t PRODUTO \t QTD \t VALOR \n");
+                    printf("________________________________________\n");
+                    for (int i = 0; i < tamanho; i++) { // Lista todos os produtos
+                        printf(" %d \t %-10s \t %d \t R$%.2f\n",
+                            produtos[i].idL, produtos[i].nomeL, produtos[i].quantidadeL, produtos[i].valorL);
+                    }
+                    printf("\n");
+                    printf("\n");
+                    system("pause");
+                }
+                else if (frutaLegume == 3) 
+                {
+                    printf("FRUTAS:\n");
+                    printf("\n");
+                    printf(" ID \t PRODUTO \t QTD \t VALOR \n");
+                    printf("________________________________________\n");
+
+                    for (int i = 0; i < tamanho; i++) { // Lista todos os produtos
+                        printf(" %d \t %-10s \t %d \t R$%.2f\n",
+                            produtos[i].idF, produtos[i].nomeF, produtos[i].quantidadeF, produtos[i].valorF);
+                    }
+                    printf("\n");
+                    printf("\n");
+
+                    printf("LEGUMES:\n");
+                    printf("\n");
+                    printf(" ID \t PRODUTO \t QTD \t VALOR \n");
+                    printf("________________________________________\n");
+                    for (int i = 0; i < tamanho; i++) { // Lista todos os produtos
+                        printf(" %d \t %-10s \t %d \t R$%.2f\n",
+                            produtos[i].idL, produtos[i].nomeL, produtos[i].quantidadeL, produtos[i].valorL);
+                    }
+                    printf("\n");
+                    printf("\n");
+                    system("pause");
+                }
+                else if (frutaLegume == 4)
+                {
+                   
+                    printf("Voltando ao estoque...\n");
+                    printf("\n");
+                    break; // sair do loop do estoque
+                }
+                else
+                {
+                    printf("Digito invalido!\n");
+                    printf("\n");
+                    system("pause");
+                }
             }
-            printf("\n");
             printf("\n");
             system("pause");
         }
