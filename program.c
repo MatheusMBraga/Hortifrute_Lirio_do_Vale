@@ -1,6 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
 
 int main()
 {
@@ -103,8 +105,8 @@ int main()
             printf("\n");
             printf("\n");
 
-            inicio_adm:
             printf("Escolha uma das opcoes abaixo: \n");
+            printf("\n");
             printf("1. Estoque \n"); //printf(" modificar dados do estoque\n"); ==> dentro de estoque ----> 1. Visualizar ou 2. modificar (2 opçoes)
             printf("2. Cadatrar novos itens\n");
             printf("3. Lixeira\n");
@@ -129,7 +131,7 @@ int main()
                 printf("Saindo...\n");
                 printf("\n");
                 system("pause");
-                exit(); // TEMPORARIO
+                return 0; // TEMPORARIO
                 //goto inicio;
             }
            
@@ -171,16 +173,14 @@ int Estoque_ADM()
     };
 
     struct Produto* produtos = NULL; // Ponteiro para produtos
-    int capacidade = 0; // Capacidade atual do array
     int tamanho = 0; // Número de produtos inseridos
+    int capacidade = 0;
     int opcao = 0;
 
     while (1) {
         
         printf("\n");
         printf("________ESTOQUE________\n");
-        printf("\n");
-        printf("Itens do meu estoque: \n");
         printf("\n");
 
         printf("1. Adicionar produto\n");
@@ -190,32 +190,63 @@ int Estoque_ADM()
         scanf("%d", &opcao);
 
         if (opcao == 1) {
-            // Verifica se é necessário aumentar a capacidade
-            if (tamanho == capacidade) {
-                capacidade = (capacidade == 0) ? 1 : capacidade * 2; // Dobra a capacidade
-                produtos = realloc(produtos, capacidade * sizeof(struct Produto));
-                if (produtos == NULL) {
-                    printf("Erro ao alocar memória!\n");
-                    return 1; // Sai em caso de erro
+
+            printf("\n");
+            printf("\n");
+            printf("_____NOVO PRODUTO AO ESTOQUE______");
+            printf("\n");
+            printf("\n");
+
+            char addItem;
+            do
+            {
+
+                if (tamanho == capacidade) {
+                    capacidade = (capacidade == 0) ? 1 : capacidade * 2;  // Dobra a capacidade
+                    struct Produto* temp = realloc(produtos, capacidade * sizeof(struct Produto));
+                    if (temp == NULL) {
+                        printf("Erro ao alocar memória!\n");
+                        free(produtos);  // Libera a memória previamente alocada
+                        return 1;  // Sai em caso de erro
+                    }
+                    produtos = temp;  // Atualiza o ponteiro
                 }
-            }
 
-            // Adiciona um novo produto
-            struct Produto novoProduto;
-            novoProduto.id = tamanho + 1; // Define o ID
-            printf("Nome do produto: ");
-            scanf("%s", novoProduto.nome);
-            printf("Quantidade: ");
-            scanf("%d", &novoProduto.quantidade);
-            printf("Valor: ");
-            scanf("%f", &novoProduto.valor);
+                // Adiciona um novo produto
+                struct Produto novoProduto;
+                novoProduto.id = tamanho + 1;  // Define o ID automaticamente
 
-            produtos[tamanho] = novoProduto; // Adiciona o produto ao array
-            tamanho++; // Aumenta o número de produtos
+                printf("Nome do produto: ");
+                scanf(" %49[^\n]", novoProduto.nome);  // Lê o nome com espaços, até 49 caracteres
+
+                printf("Quantidade: ");
+                scanf("%d", &novoProduto.quantidade);
+
+                printf("Valor: ");
+                scanf("%f", &novoProduto.valor);
+
+                // Adiciona o novo produto ao array
+                produtos[tamanho] = novoProduto;  // Copia os dados para o array
+                tamanho++;  // Incrementa o número de produtos
+                printf("\n");
+                printf("Produto adicionado com sucesso!\n");
+                printf("\n");
+                printf("\n");
+                printf("Gostaria de adicionar outro produto? (S/N): ");
+                getchar();
+                scanf("%c", &addItem);
+                printf("\n");
+                
+            } while (addItem == 'S' || addItem == 's');
             
         }
         else if (opcao == 2) {
             // Listar produtos
+            printf("\n");
+            printf("\n");
+            printf("___________PRODUTOS EM ESTOQUE__________\n");
+            printf("\n");
+            printf("\n");
             printf(" ID \t PRODUTO \t QTD \t VALOR \n");
             printf("________________________________________\n");
 
@@ -223,6 +254,9 @@ int Estoque_ADM()
                 printf(" %d \t %-10s \t %d \t R$%.2f\n",
                     produtos[i].id, produtos[i].nome, produtos[i].quantidade, produtos[i].valor);
             }
+            printf("\n");
+            printf("\n");
+            system("pause");
         }
         else if (opcao == 3) {
             // Voltar para o main
@@ -238,41 +272,6 @@ int Estoque_ADM()
     }
 
     free(produtos); // Libera a memória alocada
-    
-    
-    /*
-    printf("\n");
-    printf("________ESTOQUE________\n");
-    printf("\n");
-    printf("Itens do meu estoque: \n");
-    printf("\n");
-    
-    struct Produto {
-        int id;
-        char nome[20];
-        int quantidade;
-        float valor;
-    };
-
-    struct Produto produtos[20] = {
-       {1,"manga", 10, 4.00},
-       {2,"banana", 5, 2.50},
-       {3,"abacaxi", 8, 3.00},
-       {4,"laranja", 12, 1.80},
-       {4,"laranja", 12, 1.80},
-       { 4,"laranja", 12, 1.80 },
-       { 4,"laranja", 12, 1.80 },
-       { 4,"laranja", 12, 1.80 }
-    };
-    
-    printf(" ID \t PRODUTO \t QTD \t VALOR \n");
-    printf("________________________________________\n");
-
-    for (int i = 0; i < 8; i++) {
-        printf("| %d \t| %s \t| %d \t| R$%.2f \n", produtos[i].id, produtos[i].nome, produtos[i].quantidade, produtos[i].valor);
-    }
-        printf("\n");
-        */
     
 }
 
