@@ -1,0 +1,10 @@
+ 1 	 abacaxi    	 10 	 R$10.00 	F
+ 1 	 cenoura    	 20 	 R$5.00 	l
+ 1 	 manga      	 50 	 R$10.00 	F
+ 1 	 cebolinha  	 80 	 R$2.00 	L
+ 1 	 pera       	 20 	 R$2.00 	F
+ 1 	 coentro    	 56 	 R$5.00 	L
+ 1 	 maca       	 50 	 R$10.00 	F
+ 1 	 brocolis   	 10 	 R$10.00 	L 
+ 1 	 TESTE      	 10 	 R$1.00 	F
+ 1 	 MIRELA     	 10 	 R$1.00 	L
