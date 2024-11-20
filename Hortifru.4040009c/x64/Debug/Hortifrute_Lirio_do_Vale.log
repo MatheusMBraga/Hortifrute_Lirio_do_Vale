@@ -1,5 +1,26 @@
 ﻿  program.c
-C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(130,17): warning C4013: 'cadastroItem_ADM' indefinido; assumindo extern retornando int
-C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(143,17): warning C4013: 'Estoque_ADM' indefinido; assumindo extern retornando int
-C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(357,1): warning C4715: 'cadastroItem_ADM': nem todos os caminhos de controle retornam um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(225,21): warning C4013: 'cadastroItem_ADM' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(236,21): warning C4013: 'estoque_ADM' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(278,21): warning C4013: 'estoque_CLIENTE' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(283,21): warning C4013: 'venda_CLIENTE' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(287,21): warning C4013: 'carrinho_CLIENTE' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(358,10): warning C4101: 'linha': variável local não referenciada
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(453,15): warning C4013: 'time' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(511,19): warning C4013: 'toupper' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(999,13): warning C4013: 'finalizarCompra_CLIENTE' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1003,13): warning C4013: 'removerCarrinho_CLIENTE' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1011,5): warning C4550: expressão é avaliada como uma função cuja lista de argumentos está faltando
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1043,13): warning C4033: 'removerCarrinho_CLIENTE' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1065,13): warning C4033: 'removerCarrinho_CLIENTE' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1082,13): warning C4033: 'removerCarrinho_CLIENTE' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1113,13): warning C4033: 'removerCarrinho_CLIENTE' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1120,13): warning C4033: 'removerCarrinho_CLIENTE' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1136,9): warning C4033: 'removerCarrinho_CLIENTE' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(333,1): warning C4716: 'zerandoProduto': deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(515,1): warning C4715: 'cadastroItem_ADM': nem todos os caminhos de controle retornam um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(443,1): warning C4715: 'cadItemSimpli_ADM': nem todos os caminhos de controle retornam um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(735,1): warning C4715: 'estoque_CLIENTE': nem todos os caminhos de controle retornam um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1148,1): warning C4716: 'finalizarCompra_CLIENTE': deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(938,1): warning C4715: 'venda_CLIENTE': nem todos os caminhos de controle retornam um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1142,1): warning C4716: 'removerCarrinho_CLIENTE': deve retornar um valor
   Hortifrute_Lirio_do_Vale.vcxproj -> C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\x64\Debug\Hortifrute_Lirio_do_Vale.exe
