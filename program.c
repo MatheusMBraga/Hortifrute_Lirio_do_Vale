@@ -18,12 +18,12 @@ void pause()
 }
 
 struct Pessoas {
-    char id;
+    int id;
     char usuario[20];
     char senha[20];
 };
 
-// FUNÇÃO VALIDAR LOGIN
+// Função para validar login e retornar o ID do usuário
 int validar_login(const char* usuario_input, const char* senha_input) {
     FILE* arquivo = fopen("cadastro.txt", "r");
     if (arquivo == NULL) {
@@ -31,271 +31,211 @@ int validar_login(const char* usuario_input, const char* senha_input) {
         return 0;
     }
 
-    char linha[50];
+    char linha[60];
     while (fgets(linha, sizeof(linha), arquivo)) {
         linha[strcspn(linha, "\n")] = 0; // Remove o '\n' da string lida
-        char* usuario = strtok(linha, ":");
-        char* senha = strtok(linha, ":");
-        
+        char* id_str = strtok(linha, ":");
+        char* usuario = strtok(NULL, ":");
+        char* senha = strtok(NULL, ":");
 
-        if (usuario && senha && strcmp(usuario_input, usuario) == 0 && strcmp(senha_input, senha) == 0 ) {
-            fclose(arquivo); // fechar o arquivo
-            return 1;
+        if (id_str && usuario && senha && strcmp(usuario_input, usuario) == 0 && strcmp(senha_input, senha) == 0) {
+            fclose(arquivo);
+            return atoi(id_str); // Retorna o ID do usuário
         }
     }
 
     fclose(arquivo);
-    return 0;
+    return 0; // Retorna 0 se não encontrar o usuário
 }
 
-// função para cadastro de usuarios
-int cadastro() {
-    limparTela();
+
+// Função para cadastro de usuários
+void cadastro() {
     struct Pessoas cadastro;
     int selecao;
-    printf("___________CADASTRO DE USUARIOS___________\n\n");
-    printf("1. Administrador\n2. Cliente\n0. Voltar\n==> ");
+    limparTela();
+
+    printf("___________CADASTRO DE USUARIO___________\n\n");
+    printf("escolha o tipo de cadastro:\n\n");
+
+    printf("1. Administrador\n");
+    printf("2. Cliente\n");
+    printf("==> ");
     scanf("%d", &selecao);
 
-    if (selecao == 1) {
-        system("cls");
-        printf("___________CADASTRO ADMINISTRATIVO___________\n\n");
-
-        cadastro.id = 'A'; // ID para admin definido como A
-        printf("Login (Admin): ");
+    if (selecao == 1 || selecao == 2) {
+        limparTela();
+        if (selecao == 1) {
+            printf("___________CADASTRO ADMINISTRATIVO___________\n\n\n");
+        }
+        else {
+            printf("___________CADASTRO CLIENTE___________\n\n\n");
+        }
+        cadastro.id = selecao;
+        printf("Login: ");
         scanf("%s", cadastro.usuario);
-
-        printf("Senha (Admin): ");
+        printf("Senha: ");
         scanf("%s", cadastro.senha);
 
         FILE* arquivo = fopen("cadastro.txt", "a");
         if (arquivo == NULL) {
             printf("Erro ao abrir o arquivo para escrita.\n");
-            return 1;
+            return;
         }
 
-        // Salvando os dados no arquivo
-        fprintf(arquivo, "%s:%s:%d\n", cadastro.usuario, cadastro.senha, cadastro.id);
+        // Salvar os dados no arquivo
+        fprintf(arquivo, "%d:%s:%s\n", cadastro.id, cadastro.usuario, cadastro.senha);
         fclose(arquivo);
-        printf("\n");
-        printf("Cadastro realizado com sucesso para ADMIN!\n\n");
-        system("pause");
+
+        printf("Cadastro realizado com sucesso!\n");
     }
-    else if (selecao == 2) {
-        system("cls");
-        printf("___________CADASTRO CLIENTE___________\n\n");
-       
-        cadastro.id = 'C';
-        printf("Login (Cliente): ");
-        scanf("%s", cadastro.usuario);
-        printf("Senha (Cliente): ");
-        scanf("%s", cadastro.senha);
-
-        FILE* arquivo = fopen("cadastro.txt", "a");
-        if (arquivo == NULL) {
-            printf("Erro ao abrir o arquivo para escrita.\n");
-            return 1;
-        }
-
-        fprintf(arquivo, "%s:%s:%d\n", cadastro.usuario, cadastro.senha, cadastro.id);;
-        fclose(arquivo);
-        printf("\n");
-        printf("Cadastro realizado com sucesso para CLIENTE!\n\n");
-        system("pause");
+    else {
+        printf("Opcao invalida! Cadastro nao realizado.\n");
     }
-    else if (selecao == 0)
-    {
-        system("cls");
-        printf("\n");
-        printf("Voltando...\n\n");
-        system("pause");
-        return 1;
-
-    }
-
-    return 1;
 }
+
 
 
 int main()
 {
     while (1) {
-        /*
+        int selecao;
+        limparTela();
+        printf("Programa Lirio do Vale\n");
+        printf("V1.3\n");
 
          //login
-         int selecao;
-         int id_input;
+        printf("\nEscolha uma das opcoes abaixo:\n");
+        printf("1. Login\n");
+        printf("2. Cadastrar\n");
+        printf("0. Fechar programa\n");
+        printf("==> ");
+        scanf("%d", &selecao);
 
-         FILE* arquivo = fopen("cadastro.txt", "r");
-         char l[50];
+        if (selecao == 0) {
+            printf("Finalizando programa...\n");
+            exit(0);
+        }
+        else if (selecao == 1) {
+            limparTela();
+            printf("___________LOGIN___________\n\n\n");
+            char usuario_input[50], senha_input[50];
+            int seleciona1 = 0;
+            printf("Digite seu usuario: ");
+            scanf("%49s", usuario_input);
+            printf("Digite sua senha: ");
+            scanf("%49s", senha_input);
 
-         while (fgets(l, sizeof(l), arquivo) != NULL) {
-             if (strstr(l, "65") != NULL)
-             {
-                 id_input = 1;
-             }
-             else if (strstr(l, "67") != NULL)
-             {
-                 id_input = 2;
-             };
-         }
-         while (1) {
-             system("cls");
-             //apresentação
-             printf("Programa Lirio do Vale\n");
-             printf("V1.3\n\n");
-             printf("\nEscolha uma das opcoes abaixo:\n");
-             printf("1. Login\n");
-             printf("2. Cadastrar\n");
-             printf("0. Fechar\n");
-             printf("==> ");
-             scanf("%d", &selecao);
+            int id = validar_login(usuario_input, senha_input);
+            if (id == 1) {
 
-
-             if (selecao == 1) {
-                 char usuario_input[50], senha_input[50];
-
-                 printf("Digite seu usuario: ");
-                 scanf("%49s", usuario_input);
-                 printf("Digite sua senha: ");
-                 scanf("%49s", senha_input);
-
-
-                 if (validar_login(usuario_input, senha_input)) { // Verifica se o ID retornado é válido (maior que zero)
-                     printf("\nLogin bem-sucedido!\n\n");
-
-                     printf("____________________________________________\n\n");
-                     printf("Bem vindo %s\n\n", usuario_input);
-                     if (id_input == 1)
-                     {
-                         printf("Tipo de Login: ADMINISTRATIVO\n");
-                         printf("Seu ID e: %d\n", id_input);
-                     }
-                     else
-                     {
-                         printf("Tipo de Login: CLIENTE\n");
-                         printf("Seu ID e: %d\n", id_input);
-                     }
-                     printf("____________________________________________\n");
-                     system("pause");
-                     break;
-                 }
-                 else {
-                     printf("Usuario ou senha incorreta.\n");
-                 }
-
-                 system("pause");
-             }
-             else if (selecao == 2) {
-                 cadastro();
-             }
-             else if (selecao == 0)
-             {
-                 printf("Finalizando programa...\n");
-                 exit(0);
-             }
-             else {
-                 printf("Selecao invalida! Tente novamente.\n");
-             }
-         }
-
-         */
-
-         // encurtador ==> excluir esse bloco depois
-        int i;
-        printf("adm: ");
-        scanf("%d", &i);
-        int seleciona1;
-        // Inicio sistema ADM
-        if (i == 1)
-        {
-            while (1)
-            {
-
-                limparTela();
-                printf("-------------------------------------------\nHORTIFRUTI LIRIO DO VALE\nPERFIL: ADMINISTRATIVO\n\n\n");
-
-                printf("Escolha uma das opcoes abaixo:\n\n1. Cadatrar novos itens\n2. Estoque\n3. Registro de vendas\n0. SAIR DA CONTA\n==> ");
-                scanf("%d", &seleciona1);
-                printf("\n\n");
-
-
-                if (seleciona1 == 1) // CADASTRO DE NOVOS ITENS
+                // CÓDIGO ADM
+                printf("\n______________________________\nBem-vindo, Administrador.\n______________________________\n\n"); // ADMINISTRADOR ID = 1
+                pause();
+                while (1)
                 {
-                    cadastroItem_ADM();
-                    printf("\n");
-                }
-                else if (seleciona1 == 2) // ESTOQUE
-                {
-                    /*
-                    itens faltantes:
-                        excluir item do estoque e enviar para lixeira
-                        tirar valores da quantidade (diminuir o estoque)
-                        (EM ANALISE) editar itens no estoque
-                    */
-                    estoque_ADM();
-                    printf("\n");
+
+                    limparTela();
+                    printf("-------------------------------------------\nHORTIFRUTI LIRIO DO VALE\nPERFIL: ADMINISTRATIVO\n\n\n");
+
+                    printf("Escolha uma das opcoes abaixo:\n\n1. Cadatrar novos itens\n2. Estoque\n3. Remover produto \n4. Registro de vendas \n0. SAIR DA CONTA\n==> ");
+                    scanf("%d", &seleciona1);
+                    printf("\n\n");
 
 
-
-                }
-                else if (seleciona1 == 3)
-                {
-                    // Registro da venda
-                    FILE* arquivoVenda = fopen("vendas.txt", "a");
-                    if (arquivoVenda == NULL) {
-                        printf("Erro ao abrir o arquivo de vendas.\n");
-                        return;
+                    if (seleciona1 == 1) // CADASTRO DE NOVOS ITENS
+                    {
+                        cadastroItem_ADM();
+                        printf("\n");
                     }
-                    fprintf(arquivoVenda, "Venda total: %.2f\n", totalVenda);
-                    fclose(arquivoVenda);
-                    printf("Venda registrada com sucesso!\n");
-                }
-                else if (seleciona1 == 0)
-                {
-                    printf("Saindo...\n\n");
-                    pause();
-                    break; 
-                    
+                    else if (seleciona1 == 2) // ESTOQUE
+                    {
+                        estoque_ADM();
+                        printf("\n");
+                    }
+                    else if (seleciona1 == 3) // REMOVE PRODUTOS DO ESTOQUE
+                    {
+                        removerEstoque_ADM();
+                        printf("\n");
+                    }
+                    else if (seleciona1 == 4)
+                    {
+                        limparTela();
+                        printf("\n___________RELATORIO DE VENDAS___________\n\n\n");
+                        // Registro da venda
+                        FILE* arquivoF = fopen("relatorioVendas.txt", "r");
+
+                        if (arquivoF == NULL) {
+                            printf("Erro ao abrir o arquivo.\n");
+                            return 1;
+                        }
+
+                        char linhaF[1000];
+
+                        // Lendo e exibindo cada linha do arquivo
+                        while (fgets(linhaF, sizeof(linhaF), arquivoF) != NULL) {
+                            printf("%s", linhaF);
+                        }
+                        pause();
+                    }
+                    else if (seleciona1 == 0)
+                    {
+                        printf("Saindo...\n\n");
+                        pause();
+                        break;
+
+                    }
                 }
             }
-        }
-
-        //CLIENTE
-        if (i == 2)
-        {
-            while (1)
-            {
-                limparTela();
-                printf("-------------------------------------------\nHORTIFRUTI LIRIO DO VALE\nPERFIL: CLIENTE\n\n\n");
-
-                printf("Escolha uma das opcoes abaixo:\n\n1. Produtos\n2. Adicionar ao carrinho\n3. Carrinho\n0. SAIR DA CONTA\n==> ");
-                scanf("%d", &seleciona1);
-                printf("\n\n");
-
-                if (seleciona1 == 1) // CADASTRO DE NOVOS ITENS
+            else if (id == 2) {
+                printf("\n______________________________\nBem-vindo, Cliente.\n______________________________\n\n"); //CLIENTE ID = 2
+                pause();
+                //CLIENTE
+                while (1)
                 {
-                    estoque_CLIENTE();
+                    limparTela();
+                    printf("-------------------------------------------\nHORTIFRUTI LIRIO DO VALE\nPERFIL: CLIENTE\n\n\n");
 
+                    printf("Escolha uma das opcoes abaixo:\n\n1. Produtos\n2. Adicionar ao carrinho\n3. Carrinho\n0. SAIR DA CONTA\n==> ");
+                    scanf("%d", &seleciona1);
+                    printf("\n\n");
+
+                    if (seleciona1 == 1) // CADASTRO DE NOVOS ITENS
+                    {
+                        estoque_CLIENTE();
+
+                    }
+                    else if (seleciona1 == 2)
+                    {
+                        venda_CLIENTE(); // venda do produto
+                    }
+                    else if (seleciona1 == 3)
+                    {
+                        carrinho_CLIENTE();
+                    }
+                    else if (seleciona1 == 0)
+                    {
+                        printf("Saindo...\n\n");
+                        pause();
+                        break;
+
+                    }
                 }
-                else if (seleciona1 == 2)
-                {
-                    venda_CLIENTE(); // venda do produto
-                }
-                else if (seleciona1 == 3)
-                {
-                    carrinho_CLIENTE();
-                }
-                else if (seleciona1 == 0)
-                {
-                    printf("Saindo...\n\n");
-                    pause();
-                    break;
-                    
-                }
+
             }
-
+            else {
+                printf("\n\nUsuario ou senha incorreta.\n\n");
+                pause();
+            }
         }
+        else if (selecao == 2) {
+            cadastro();
+        }
+        else {
+            printf("Selecao invalida! Tente novamente.\n\n");
+            pause();
+        }
+       
     }
     
 	return 0;
@@ -322,6 +262,9 @@ int capacidade = 0;
 char addItem = 'n'; // escolhas com caractere
 int frutaLegume; // escolhas com numeros
 int produtoEncontrado = 0; // Verifica se o novo produto já existe no array
+
+int totalQuantidade = 0;
+float totalValor = 0.0;
 
 
 // reinicia o array de produtos
@@ -438,7 +381,7 @@ int cadItemSimpli_ADM() {
     }
 
     fclose(arquivoF);
-    tamanho = 0;
+    
     zerandoProduto();
 }
 
@@ -664,16 +607,114 @@ int estoque_ADM()
             }
             printf("\n");
         }
-        free(produtos); // Libera a memória alocada
+        
     }
+}
+
+// REMOVE PRODUTO DO ESTOQUE
+int removerEstoque_ADM() {
+    limparTela();
+    printf("\n___________REMOVER PRODUTO ESTOQUE___________\n\n");
+
+    printf("\n*ATENCAO* isso removera o produto inteiro\n\nDeseja continuar? (S/N): ");
+    scanf(" %c", &addItem);
+    addItem = toupper(addItem);
+
+    if (addItem == 'S')
+    {
+        FILE*  arquivoEstoque;
+        struct Produto produtos[1000];
+        int idExcluir, encontrado = 0;
+
+        // Abre o arquivo do carrinho
+        arquivoEstoque = fopen("estoque.txt", "r");
+        if (arquivoEstoque == NULL) {
+            printf("Erro ao abrir o arquivo do carrinho.\n");
+            return;
+        }
+
+        // Lê os itens do estoque para um array
+        while (fscanf(arquivoEstoque, "%d %49s %d %f %c",
+            &produtos[tamanho].id,
+            produtos[tamanho].nome,
+            &produtos[tamanho].quantidade,
+            &produtos[tamanho].valor,
+            &produtos[tamanho].selecaoItem) == 5) {
+            tamanho++;
+        }
+        fclose(arquivoEstoque);
+
+        // Abrindo o arquivo no modo de leitura
+        FILE* arquivoEstoque1 = fopen("estoque.txt", "r");
+
+        if (arquivoEstoque1 == NULL) {
+            printf("Erro ao abrir o arquivo.\n");
+            return 1;
+        }
+        printf("______________________________________________\n\n");
+        char linhaF[9000];
+        printf("PRODUTOS:\n\n ID \t PRODUTO \t QTD \t VALOR \t TIPO \n______________________________________________\n");
+
+        // Lendo e exibindo cada linha do arquivo
+        while (fgets(linhaF, sizeof(linhaF), arquivoEstoque1) != NULL) {
+            printf("%s", linhaF);
+        }
+        fclose(arquivoEstoque1);
+        printf("______________________________________________\n");
+
+        // Pergunta qual item excluir
+        printf("\nInforme o ID do produto: ");
+        scanf("%d", &idExcluir);
+
+        
+        // Abre o carrinho para reescrever os itens restantes
+        arquivoEstoque = fopen("estoque.txt", "w");
+        if (arquivoEstoque == NULL) {
+            printf("Erro ao abrir o arquivo do carrinho para escrita.\n");
+            return;
+        }
+
+        for (int i = 0; i < tamanho; i++) {
+            if (produtos[i].id == idExcluir) {
+                encontrado = 1; // Marca que o produto foi encontrado
+                printf("\n\nProduto '%s' removido do carrinho.\n", produtos[i].nome);
+
+            }
+            else {
+                // Mantém os produtos que não foram excluídos no carrinho
+                fprintf(arquivoEstoque, " %d \t %-10s \t %d \t %.2f \t  %c\n",
+                    produtos[i].id,
+                    produtos[i].nome,
+                    produtos[i].quantidade,
+                    produtos[i].valor,
+                    produtos[i].selecaoItem);
+            }
+        }
+        fclose(arquivoEstoque);
+
+        if (!encontrado) {
+            printf("\nProduto com ID %d nao encontrado no carrinho.\n\n", idExcluir);
+            pause();
+            return;
+        }
+
+        printf("\n\nEstoque atualizado com sucesso.\n\n");
+    }
+    else {
+        return;
+    }
+
+    zerandoProduto();
+    totalQuantidade = 0;
+    totalValor = 0.0;
+    pause();
+
 }
 
 
 
 // CLIENTE
 
-int totalQuantidade = 0;
-float totalValor = 0.0;
 
 // ESTOQUE PARA O CLIENTE
 int estoque_CLIENTE() {
@@ -940,7 +981,8 @@ int venda_CLIENTE() {
 // CARRINHO DO CLIENTE
 int carrinho_CLIENTE() {
     while (1) {
-
+        totalQuantidade = 0;
+        totalValor = 0.0;
         limparTela();
         printf("\n___________CARRINHO___________\n\n\n");
 
@@ -1003,24 +1045,26 @@ int carrinho_CLIENTE() {
             removerCarrinho_CLIENTE();
         }
         else if (frutaLegume == 0) {
+            printf("\n\n");
+            zerandoProduto;
+
+            // zerar a quantidade e o valor para atualizarem nas modificaçoes
+            totalQuantidade = 0;
+            totalValor = 0.0;
+
+            pause();
             return 1;
         }
+        
     }
-
-    printf("\n\n");
-    zerandoProduto;
-
-    // zerar a quantidade e o valor para atualizarem nas modificaçoes
-    totalQuantidade = 0;
-    totalValor = 0.0;
-
-    pause();
+    
+    
 }
 
 // REMOVE PRODUTOS DO CARRINHO DO CLIENTE
 int removerCarrinho_CLIENTE() {
 
-    printf("\n___________REMOVER PRODUTO___________\n\n");
+    printf("\n___________REMOVER PRODUTO CARRINHO___________\n\n");
 
     printf("\n*ATENCAO* isso removera o produto e sua quantidade\n");
 
@@ -1141,9 +1185,186 @@ int removerCarrinho_CLIENTE() {
     pause();
 }
 
+// Limpa o carrinho de compras
+int limparCarrinho() {
+    FILE* arquivo = fopen("carrinho.txt", "w");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para limpar.\n");
+        return;
+    }
+    fclose(arquivo); 
+    printf("Arquivo limpo com sucesso.\n");
+}
 
+// Sessao de pagamento dentro do Carrinho do cliente
 int finalizarCompra_CLIENTE() {
 
+    while (1) {
+        limparTela();
+        printf("\n___________FINALIZAR COMPRA___________\n\n");
 
+        printf("Valor total da compra: R$ %.2f\n\n", totalValor);
+        printf("Insira a forma de pagamento:\n");
+        printf("1. Debito\n2. Credito\n3. Pix\n4. Cartao Lirio do Vale\n0. Voltar\n==> ");
+        scanf("%d", &frutaLegume);
+
+        if (frutaLegume == 1) {
+            printf("\n________________________________________\n\n ");
+            printf("Pagamento com cartao de debito selecionado ");
+            printf("\n\n________________________________________\n ");
+            printf("\nPagamento autorizado!\nObrigado por comprar no Lirio do Vale.\n\n"); 
+            pause();
+            break;
+        }
+        else if (frutaLegume == 2) {
+            printf("\n________________________________________\n\n ");
+            printf("Pagamento com cartao de credito selecionado ");
+            printf("\n\n________________________________________\n ");
+
+            float t2 = totalValor / 2;
+            float t3 = totalValor / 3;
+            float t4 = totalValor / 4;
+            float t5 = totalValor / 5;
+            float t6 = totalValor / 6;
+
+            printf("\nParcelas:\n");
+            printf("1. 1x de R$ %.2f\n", totalValor);
+            printf("2. 2x de R$ %.2f\n", t2);
+            printf("3. 3x de R$ %.2f\n", t3);
+            printf("4. 4x de R$ %.2f\n", t4);
+            printf("5. 5x de R$ %.2f\n", t5);
+            printf("6. 6x de R$ %.2f\n", t6);
+            printf("0. Voltar\n==> ");
+            scanf("%d", &frutaLegume);
+
+            printf("_____________________________________\n");
+            if (frutaLegume == 0) {
+                continue;
+            }
+            else if (frutaLegume == 1) {
+                printf("\nSelecionado 1x de R$ %.2f\n", totalValor);
+            }
+            else if (frutaLegume == 2) {
+                printf("\nSelecionado 2x de R$ %.2f\n", t2);
+            }
+            else if (frutaLegume == 3) {
+                printf("\nSelecionado 3x de R$ %.2f\n", t3);
+            }
+            else if (frutaLegume == 4) {
+                printf("\nSelecionado 4x de R$ %.2f\n", t4);
+            }
+            else if (frutaLegume == 5) {
+                printf("\nSelecionado 5x de R$ %.2f\n", t5);
+            }
+            else if (frutaLegume == 6) {
+                printf("\nSelecionado 6x de R$ %.2f\n", t6);
+            }
+            else {
+                printf("Digito invalido!");
+            }
+            printf("\n_____________________________________\n\n");
+            pause();
+            printf("\nPagamento autorizado!\nObrigado por comprar no Lirio do Vale.\n\n");
+            pause();
+            break;
+        }
+        else if (frutaLegume == 3) {
+
+            printf("\n_____________________________________\n\n");
+            printf("Pagamento via Pix selecionado ");
+            printf("\n\n_____________________________________\n");
+            printf("\nServico temporariamente indisponivel, favor selecionar outra forma de pagamento.\n\n");
+            pause();
+            continue;
+        }
+        else if (frutaLegume == 4) {
+            printf("\n___________________________________________\n\n");
+            printf("Pagamento com Cartao Lirio do Vale selecionado");
+            printf("\n\n___________________________________________\n");
+            pause();
+            printf("\n\nPagamento com Cartao Lirio do Vale autorizado!\nObrigado por comprar no Lirio do Vale.\n\n");
+            printf("\n_____________________________________________________\n\n");
+            printf("PARABENS! voce ganhou 1 ficha da sorte para concorrer a um carro 0 KM.\n");
+            printf("Quanto mais comprar com nossos cartoes, mais chances tem de ganham!");
+            printf("\n\n_____________________________________________________\n");
+            pause();
+            break;
+        }
+        else if (frutaLegume == 0) {
+            printf("\nOperacao cancelada. Retornando ao carrinho...\n\n");
+
+            return 1; // Sai da função
+        }
+        else {
+            printf("\nOpcao invalida. Tente novamente.\n\n");
+        }
+       
+    }
+    relatorioVendas();
 }
+
+// Registra todas as comprar que foram finalizadas
+int relatorioVendas() {
+    struct Produto carrinho[9000];
+    int idVenda = gerarIdAleatorio();
+
+    // Abre o arquivo do carrinho para leitura
+    FILE* arquivoCarrinho = fopen("carrinho.txt", "r");
+    if (arquivoCarrinho == NULL) {
+        printf("Erro ao abrir o arquivo do carrinho.\n");
+        return -1; // Retorna erro
+    }
+
+    // Lê os itens do carrinho para um array
+    while (fscanf(arquivoCarrinho, "%d %49s %d %f %c",
+        &carrinho[tamanho].id,
+        carrinho[tamanho].nome,
+        &carrinho[tamanho].quantidade,
+        &carrinho[tamanho].valor,
+        &carrinho[tamanho].selecaoItem) == 5) {
+        tamanho++;
+    }
+    fclose(arquivoCarrinho);
+
+    // Abre o arquivo de relatório de vendas para escrita
+    FILE* arquivo = fopen("relatorioVendas.txt", "a"); // Modo append
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo de relatorio de vendas.\n");
+        return -1; // Retorna erro
+    }
+
+    fprintf(arquivo, "\n\n\n\n-----------------------------------VENDA-----------------------------------\n\n\n");
+    
+    fprintf(arquivo, "CODIGO DA VENDA: %d\n\n\n", idVenda);
+
+
+    // Escreve os itens do carrinho no arquivo de relatório
+    for (int i = 0; i < tamanho; i++) {
+        fprintf(arquivo, "ID: %d\tItem: %s\tQuantidade: %d\tPreco:__________ R$ %.2f\n\n",
+            carrinho[i].id, carrinho[i].nome, carrinho[i].quantidade, carrinho[i].valor);
+    }
+
+    fprintf(arquivo, "---------------\n\n");
+    fprintf(arquivo, "Total: R$ %.2f\n\n", totalValor);
+    fprintf(arquivo, "---------------\n\n\n");
+   
+
+    fclose(arquivo);
+    zerandoProduto();
+    limparCarrinho();
+    carrinho == NULL;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 

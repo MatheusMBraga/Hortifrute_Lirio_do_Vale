@@ -1,4 +1,2 @@
- 3539 	 manga      	 16 	 1.00 	  F
- 3565 	 cebola     	 16 	 2.00 	  L
- 2283 	 abacaxi    	 16 	 10.00 	  F
- 2381 	 cenoura    	 16 	 3.00 	  L
+ 4130 	 teste1     	 8 	 1.00 	  F
+ 5049 	 teste2     	 9 	 1.00 	  F
