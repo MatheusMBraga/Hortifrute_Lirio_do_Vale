@@ -531,7 +531,7 @@ int estoque_ADM()
 
                 // Fechando o arquivo
                 fclose(arquivoL);
-                
+                printf("\n\n");
                 pause();
             }
             else if (frutaLegume == 3)

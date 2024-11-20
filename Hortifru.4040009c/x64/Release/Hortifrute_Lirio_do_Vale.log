@@ -1,0 +1,32 @@
+﻿  program.c
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(148,25): warning C4013: 'cadastroItem_ADM' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(153,25): warning C4013: 'estoque_ADM' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(158,25): warning C4013: 'removerEstoque_ADM' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(205,25): warning C4013: 'estoque_CLIENTE' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(210,25): warning C4013: 'venda_CLIENTE' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(214,25): warning C4013: 'carrinho_CLIENTE' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(301,10): warning C4101: 'linha': variável local não referenciada
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(396,15): warning C4013: 'time' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(454,19): warning C4013: 'toupper' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(633,13): warning C4033: 'removerEstoque_ADM' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(674,13): warning C4033: 'removerEstoque_ADM' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(698,13): warning C4033: 'removerEstoque_ADM' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(704,9): warning C4033: 'removerEstoque_ADM' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1041,13): warning C4013: 'finalizarCompra_CLIENTE' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1045,13): warning C4013: 'removerCarrinho_CLIENTE' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1049,13): warning C4550: expressão é avaliada como uma função cuja lista de argumentos está faltando
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1087,13): warning C4033: 'removerCarrinho_CLIENTE' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1109,13): warning C4033: 'removerCarrinho_CLIENTE' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1126,13): warning C4033: 'removerCarrinho_CLIENTE' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1157,13): warning C4033: 'removerCarrinho_CLIENTE' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1164,13): warning C4033: 'removerCarrinho_CLIENTE' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1180,9): warning C4033: 'removerCarrinho_CLIENTE' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1193,9): warning C4033: 'limparCarrinho' deve retornar um valor
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1303,5): warning C4013: 'relatorioVendas' indefinido; assumindo extern retornando int
+C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\program.c(1355,14): warning C4553: '==': o resultado da expressão não usado; você pretendia que fosse '='?
+  Gerando código
+  2 of 26 functions ( 7.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finalizada a geração de código
+  Hortifrute_Lirio_do_Vale.vcxproj -> C:\Users\mathe\Desktop\PIM faculdade\Hortifrute_Lirio_do_Vale\x64\Release\Hortifrute_Lirio_do_Vale.exe
