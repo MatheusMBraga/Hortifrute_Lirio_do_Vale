@@ -1,5 +1,2 @@
-
-a:a:67
-c:c:65
-1:admin:admin
-2:teste2:teste2
+1:adm:adm
+2:cli:cli

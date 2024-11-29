@@ -1,3 +1,2 @@
- 4130 	 teste1     	 8 	 1.00 	  F
- 5049 	 teste2     	 9 	 1.00 	  F
- 4662 	 cebola     	 50 	 2.00 	  L
+ 5528 	 manga      	 19 	 3.00 	  F
+ 5558 	 cenoura    	 20 	 2.00 	  L

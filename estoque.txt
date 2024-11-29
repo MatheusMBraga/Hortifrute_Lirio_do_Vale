@@ -1,3 +1,4 @@
- 4130 	 teste1     	 8 	 1.00 	  F
- 5049 	 teste2     	 9 	 1.00 	  F
- 3277 	 teste3     	 11 	 20.00 	  F
+ 6802 	 teste1     	 10 	 1.00 	  F
+ 6922 	 teste2     	 10 	 1.00 	  L
+ 8780 	 manga      	 15 	 3.00 	  F
+ 8820 	 cenoura    	 10 	 2.00 	  L

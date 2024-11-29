@@ -17,11 +17,16 @@ void pause()
     getchar();
 }
 
-struct Pessoas {
+typedef struct Pessoas {
     int id;
     char usuario[20];
     char senha[20];
-};
+}Pessoas;
+
+// Zerar a variavel cadastros da função 'Pessoas'
+int zerandocadastro(){ 
+    struct Pessoas* cadastro = NULL; 
+}
 
 // Função para validar login e retornar o ID do usuário
 int validar_login(const char* usuario_input, const char* senha_input) {
@@ -48,13 +53,12 @@ int validar_login(const char* usuario_input, const char* senha_input) {
     return 0; // Retorna 0 se não encontrar o usuário
 }
 
-
 // Função para cadastro de usuários
 void cadastro() {
     struct Pessoas cadastro;
-    int selecao;
+    int selecao = 0;
     limparTela();
-
+    zerandocadastro();
     printf("___________CADASTRO DE USUARIO___________\n\n");
     printf("escolha o tipo de cadastro:\n\n");
 
@@ -87,7 +91,8 @@ void cadastro() {
         fprintf(arquivo, "%d:%s:%s\n", cadastro.id, cadastro.usuario, cadastro.senha);
         fclose(arquivo);
 
-        printf("Cadastro realizado com sucesso!\n");
+        printf("\n\nCadastro realizado com sucesso!\n\n");
+        pause();
     }
     else {
         printf("Opcao invalida! Cadastro nao realizado.\n");
@@ -121,6 +126,9 @@ int main()
             printf("___________LOGIN___________\n\n\n");
             char usuario_input[50], senha_input[50];
             int seleciona1 = 0;
+
+            usuario_input == 0;
+            senha_input == 0;
             printf("Digite seu usuario: ");
             scanf("%49s", usuario_input);
             printf("Digite sua senha: ");
@@ -227,6 +235,7 @@ int main()
                 printf("\n\nUsuario ou senha incorreta.\n\n");
                 pause();
             }
+            id == 0;
         }
         else if (selecao == 2) {
             cadastro();
@@ -260,7 +269,7 @@ struct Produto tempProduto;
 int tamanho = 0; // Número de produtos inseridos frutas
 int capacidade = 0;
 char addItem = 'n'; // escolhas com caractere
-int frutaLegume; // escolhas com numeros
+int frutaLegume = 0; // escolhas com numeros
 int produtoEncontrado = 0; // Verifica se o novo produto já existe no array
 
 int totalQuantidade = 0;
@@ -272,7 +281,14 @@ int zerandoProduto() {
     
     memset(produtos, 0, capacidade * sizeof(struct Produto));  // Limpa o array de produtos
     tamanho = 0;  // Redefine o contador de produtos
-    
+     
+    capacidade = 0;
+    addItem = 'n'; 
+    frutaLegume = 0; 
+    produtoEncontrado = 0; 
+
+    totalQuantidade = 0;
+    totalValor = 0.0;
 }
 
 //GERADOR DE ID ALEATORIO
@@ -302,6 +318,7 @@ int cadItemSimpli_ADM() {
     
 
     // Abrindo o arquivo no modo leitura para carregar todos os produtos no array
+   
     FILE* arquivoF = fopen("estoque.txt", "r");
     if (arquivoF == NULL) {
         printf("Erro ao abrir o arquivo para leitura. Criando novo arquivo...\n");
@@ -365,6 +382,7 @@ int cadItemSimpli_ADM() {
     }
 
     // Reescreve o arquivo com todos os produtos do array, evitando duplicação
+    arquivoF = NULL;
     arquivoF = fopen("estoque.txt", "w");
     if (arquivoF == NULL) {
         printf("Erro ao abrir o arquivo para escrita.\n");
@@ -452,7 +470,7 @@ int cadastroItem_ADM()
         printf("Gostaria de adicionar outro produto? (S/N): ");
         scanf(" %c", &addItem);
         addItem = toupper(addItem);
-
+        
     } while (addItem == 'S');
     
 }
@@ -479,6 +497,7 @@ int estoque_ADM()
             {
                 //ESTOQUE FRUTAS ==> opção 1
                 limparTela();
+                
                 printf("FRUTAS:\n\n ID \t PRODUTO \t QTD \t VALOR \t TIPO \n______________________________________________\n");
                 
                 // Abrindo o arquivo no modo de leitura
@@ -489,7 +508,7 @@ int estoque_ADM()
                     return 1;
                 }
 
-                char linhaF[100];
+                char linhaF[9000];
 
                 // Lendo e exibindo cada linha do arquivo
                 while (fgets(linhaF, sizeof(linhaF), arquivoF) != NULL) {
@@ -502,6 +521,7 @@ int estoque_ADM()
 
                 // Fechando o arquivo
                 fclose(arquivoF);
+                arquivoF = NULL;
                 printf("\n\n");
                 pause();
             }
@@ -531,6 +551,7 @@ int estoque_ADM()
 
                 // Fechando o arquivo
                 fclose(arquivoL);
+                arquivoL = NULL;
                 printf("\n\n");
                 pause();
             }
@@ -548,7 +569,7 @@ int estoque_ADM()
                     return 1;
                 }
 
-                char linhaF[100];
+                char linhaF[9000];
 
                 // Lendo e exibindo cada linha do arquivo
                 while (fgets(linhaF, sizeof(linhaF), arquivoF) != NULL) {
@@ -561,6 +582,7 @@ int estoque_ADM()
 
                 // Fechando o arquivo
                 fclose(arquivoF);
+                arquivoF = NULL;
                 printf("\n\n");
                
 
@@ -589,8 +611,11 @@ int estoque_ADM()
 
                 // Fechando o arquivo
                 fclose(arquivoL);
+                arquivoL = NULL;
                 printf("\n\n");
                 pause();
+                linhaL == 0;
+                linhaF == 0;
             }
             else if (frutaLegume == 0)
             {
@@ -598,6 +623,7 @@ int estoque_ADM()
                 printf("Voltando a pagina inicial...\n\n");
                 pause();
                 return 1; // sair do loop do estoque
+                zerandoProduto();
             }
             else
             {
@@ -607,7 +633,7 @@ int estoque_ADM()
             }
             printf("\n");
         }
-        
+        zerandoProduto();
     }
 }
 
@@ -691,6 +717,7 @@ int removerEstoque_ADM() {
             }
         }
         fclose(arquivoEstoque);
+        arquivoEstoque = NULL;
 
         if (!encontrado) {
             printf("\nProduto com ID %d nao encontrado no carrinho.\n\n", idExcluir);
@@ -705,10 +732,8 @@ int removerEstoque_ADM() {
     }
 
     zerandoProduto();
-    totalQuantidade = 0;
-    totalValor = 0.0;
     pause();
-
+    
 }
 
 
@@ -743,6 +768,7 @@ int estoque_CLIENTE() {
 
     // Fechando o arquivo
     fclose(arquivoF);
+    arquivoF == NULL;
     printf("\n\n");
 
 
@@ -771,6 +797,7 @@ int estoque_CLIENTE() {
 
     // Fechando o arquivo
     fclose(arquivoL);
+    arquivoL == NULL;
     printf("\n\n");
     pause();
 }
@@ -802,6 +829,7 @@ int venda_CLIENTE() {
 
     // Fechando o arquivo
     fclose(arquivo);
+    arquivo == NULL;
     printf("\n\n");
 
     printf("Gostaria de adicionar algum produto ao carrinho? (S/N): ");
@@ -844,7 +872,8 @@ int venda_CLIENTE() {
                 }
             }
 
-            fclose(arquivo); 
+            fclose(arquivo);
+            arquivo == NULL;
 
             // Procura pelo produto no array
             for (int i = 0; i < tamanho; i++) {
@@ -928,6 +957,7 @@ int venda_CLIENTE() {
                             }
 
                             fclose(arquivoCarrinho);
+                            arquivoCarrinho == NULL;
 
                             // Atualiza o arquivo de estoque
                             FILE* arquivoEstoque = fopen("estoque.txt", "w");
@@ -946,7 +976,7 @@ int venda_CLIENTE() {
                             }
 
                             fclose(arquivoEstoque); // Fecha o arquivo de estoque
-
+                            arquivoEstoque == NULL;
                             printf("\nProduto atualizado no carrinho.\n\n");
                         }
                         else {
@@ -954,7 +984,7 @@ int venda_CLIENTE() {
                         }
                     }
                     else {
-                        printf("\nProduto não adicionado ao carrinho.\n");
+                        printf("\nProduto nao adicionado ao carrinho.\n");
                     }
                     break; 
                 }
@@ -1005,7 +1035,7 @@ int carrinho_CLIENTE() {
 
         // Fechando o arquivo
         fclose(arquivoCarrinho);
-
+        arquivoCarrinho = NULL;
         printf("\n______________________________________________\n\n");
 
 
@@ -1027,7 +1057,7 @@ int carrinho_CLIENTE() {
 
         }
         fclose(arquivoVenda);
-
+        arquivoVenda = NULL;
 
         printf("total de itens: %d\n", totalQuantidade);
         printf("total a pagar: R$ %.2f\n", totalValor);
@@ -1298,7 +1328,7 @@ int finalizarCompra_CLIENTE() {
         else {
             printf("\nOpcao invalida. Tente novamente.\n\n");
         }
-       
+        
     }
     relatorioVendas();
 }
